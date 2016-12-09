@@ -24,7 +24,7 @@ node {
             usernameVariable: 'DOCKERHUB_USERNAME'
         ]]
     ) {
-        sh "docker login devrandorfer-microsoft.azurecr.io -u '${env.DOCKERHUB_USERNAME}' -p '${env.DOCKERHUB_PASSWORD}' -e ryan@microsoft.com"
+        sh "docker login devrandorfer-microsoft.azurecr.io -u '${env.DOCKERHUB_USERNAME}' -p '${env.DOCKERHUB_PASSWORD}'"
         sh "docker push mesosphere/vny:${gitCommit()}"
     }
 }
