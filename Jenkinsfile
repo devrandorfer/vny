@@ -28,4 +28,16 @@ node {
 	sh "docker tag mesosphere/vny:${gitCommit()} devrandorfer-microsoft.azurecr.io/mesosphere/vny:${gitCommit()}"
         sh "docker push devrandorfer-microsoft.azurecr.io/mesosphere/vny:${gitCommit()}"
     }
+    
+    // Deploy
+    stage 'Deploy'
+
+    marathon(
+        url: 'http://marathon.mesos:8080',
+        forceUpdate: false,
+        credentialsId: 'dcos-token',
+        filename: 'marathon.json',
+        appid: 'nginx-mesosphere',
+        docker: "mesosphere/vny:${gitCommit()}".toString()
+    )
 }
