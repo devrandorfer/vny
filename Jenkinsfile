@@ -25,6 +25,7 @@ node {
         ]]
     ) {
         sh "docker login -u '${env.DOCKERHUB_USERNAME}' -p '${env.DOCKERHUB_PASSWORD}' devrandorfer-microsoft.azurecr.io"
+	sh "docker tag mesosphere/vny devrandorfer-microsoft.azurecr.io/mesosphere/vny:${gitCommit()}"
         sh "docker push devrandorfer-microsoft.azurecr.io/mesosphere/vny:${gitCommit()}"
     }
 }
